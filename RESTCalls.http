@@ -1,0 +1,39 @@
+
+
+###
+@name = SendRegularArray
+POST http://localhost:5030/api/requestobj/secondlargest HTTP/1.1
+Content-Type: application/json
+
+{
+  "RequestArrayObj" : [
+    1,2,3
+  ]
+}
+
+###
+@name = SendemptyArray
+###
+POST http://localhost:5030/api/requestobj/secondlargest HTTP/1.1
+Content-Type: application/json
+
+{
+  "RequestArrayObj" : [
+  ]
+}
+
+
+###
+@name = DontSendArray
+###
+POST http://localhost:5030/api/requestobj/secondlargest HTTP/1.1
+Content-Type: application/json
+
+{
+  "RequestArrayObj" 
+}
+
+
+###
+
+GET https://restcountries.com/v3.1/name/greece?fields=name,capital,borders HTTP/1.1
