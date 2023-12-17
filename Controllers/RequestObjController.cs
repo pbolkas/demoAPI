@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using DemoAPI.Services;
 using Microsoft.AspNetCore.Authorization;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
 using DemoAPI.Contracts.Requests;
 using DemoAPI.Entities;
 using System.Text.Json;

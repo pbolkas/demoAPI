@@ -1,5 +1,3 @@
-using Swashbuckle.AspNetCore.SwaggerGen;
-
 namespace DemoAPI.Entities
 {
   public class CountryDTO

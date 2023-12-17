@@ -22,6 +22,9 @@ namespace DemoAPI.Controllers
 
     [AllowAnonymous]
     [HttpGet("country")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetCountryDetails([FromQuery] string countryName)
     {
 
