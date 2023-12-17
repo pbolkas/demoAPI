@@ -1,6 +1,7 @@
-using DemoAPI.Configurations;
+using System.Text.Json;
 using DemoAPI.Entities;
-using Microsoft.Extensions.Options;
+using DemoAPI.Entities.Exceptions;
+using DemoAPI.WebClient;
 
 namespace DemoAPI.Services
 {
@@ -14,22 +15,30 @@ namespace DemoAPI.Services
 
     private readonly IConfiguration _apiConfiguration;
 
+    private readonly IWebClient _webClient;
+
     public CountriesService(IConfiguration config)
     {
       _apiConfiguration = config;
+      _webClient = new WebClient.WebClient(_apiConfiguration["CountriesAPI"]);
     }
 
     public async Task<CountryDTO> GetCountryAsync(string countryName)
     {
+      var response = await _webClient.GetRequest($"name/{countryName}", "fields=name,capital,borders");
+    
+      var strresponse = await response.Content.ReadAsStringAsync();
 
-      await Task.Delay(100);
+      if(response.StatusCode != System.Net.HttpStatusCode.OK)
+      {
+        throw new CountriesAPIException(strresponse, response.StatusCode);
+      }
 
-      string URL = _apiConfiguration["CountriesAPI"];
+      JsonSerializerOptions options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+      var countries = JsonSerializer.Deserialize<CountryDTO[]>(strresponse, options);
       
-      return new CountryDTO();
+      return countries[0];
     }
 
   }
-
-  private async Task<CountryDTO> 
 }
