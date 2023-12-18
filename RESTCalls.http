@@ -33,7 +33,3 @@ Content-Type: application/json
   "RequestArrayObj" 
 }
 
-
-###
-
-GET https://restcountries.com/v3.1/name/greece?fields=name,capital,borders HTTP/1.1
